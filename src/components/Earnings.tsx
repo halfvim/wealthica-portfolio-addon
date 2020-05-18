@@ -63,7 +63,7 @@ export default (props: Props) => {
     })
       .then(response => response.json())
       .then(response => {
-        console.log('earnings', response);
+        console.debug('earnings', response);
         const document = response.finance.result[0].documents[0];
         setDocument(document);
       })
