@@ -15,7 +15,7 @@ export default class ProfitLossPercentageTimeline extends Component<Props> {
     const data = this.props.portfolios.map(portfolio => {
       return {
         x: moment(portfolio.date).valueOf(),
-        y: ((portfolio.value - portfolio.deposits) / portfolio.deposits) * 100,
+        y: portfolio.deposits <= 0 ? 0 : ((portfolio.value - portfolio.deposits) / portfolio.deposits) * 100,
         pnlValue: this.props.isPrivateMode
           ? '-'
           : formatCurrency(portfolio.value - portfolio.deposits, 2).toLocaleString(),
