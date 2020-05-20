@@ -177,10 +177,10 @@ class App extends Component<Props, State> {
     const transactionsByDate = parseTransactionsResponse(transactions, this.state.currencyCache, accounts);
     console.debug('Transactions by date: ', transactionsByDate);
 
-    const portfolioPerDay = Object.keys(portfolioByDate).reduce((hash, date) => {
+    const portfolioPerDay = Array.from(new Set(Object.keys(portfolioByDate).concat(Object.keys(transactionsByDate)))).sort().reduce((hash, date) => {
       const data = transactionsByDate[date] || {};
       hash[date] = {
-        value: portfolioByDate[date],
+        value: portfolioByDate[date] || 0,
         deposit: data.deposit || 0,
         withdrawal: data.withdrawal || 0,
         income: data.income || 0,
